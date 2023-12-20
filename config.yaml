@@ -1,0 +1,1066 @@
+# Database Configuration
+database:
+  mysql:
+    driverName: MYSQL
+    host: MYSQL_HOST
+    port: MYSQL_PORT
+    user: MYSQL_USER
+    password: MYSQL_PASSWORD
+    schema:
+    database: DATABASE
+
+
+log:
+  filename:
+  log_level:
+  max_size:
+  max_backups:
+  max_age:
+  compress:
+  encoding:
+
+scarb:
+  version: 2.3.1
+
+# Model List Configuration
+module:
+  - name: XGBoost
+    description: XGBoost The idea of combining multiple weak learners into a strong classifier improves the model's predictive ability
+  - name: Decision tree
+    description: The main advantage of decision trees is that they are easy to understand and interpret, and can handle continuous and discrete data, missing values, and other issues. However, due to the susceptibility of decision trees to overfitting and underfitting issues, attention should be paid to controlling the complexity and pruning techniques of the tree when using it.
+ipfs:
+  url:
+  auth:
+
+
+giza:
+  user:
+  passwd:
+  email:
+
+# Disease category configuration
+disease:
+  Acute Inflammations:
+    index: 0
+    positions: ["head", "abdomen", "lowerAbdomen"]
+    description: "Acute inflammations are rapid and short-term immune responses to harmful stimuli, such as infections or injuries. They involve increased blood flow, swelling, heat, and pain at the affected site. The body's immune cells release chemicals to fight off pathogens and repair damaged tissue. Acute inflammations are crucial for the body's defense mechanism and facilitate the healing process. However, if the inflammation persists or becomes chronic, it can lead to further complications. Proper diagnosis and timely treatment are essential to manage acute inflammations effectively."
+    inputs:
+      - name: Temperature
+        description: Temperature of patient { 35C-42C }
+        index: 0
+        input_max: 42.0
+        input_min: 35.0
+        input_decimal_length: 1
+        warn: Please enter a number between 35.0 and 42.0 with a scale of 1 or less
+        input method: input
+        select:
+          - celsius: 0
+      - name: Occurrence of nausea
+        description: Occurrence of nausea { yes, no }
+        index: 1
+        input method: select
+        select:
+          - yes: 1
+          - no: 0
+      - name: Lumbar pain
+        description: Lumbar pain { yes, no }
+        index: 2
+        input method: select
+        select:
+          - yes: 1
+          - no: 0
+      - name: Urine pushing
+        description: Urine pushing (continuous need for urination) { yes, no }
+        index: 3
+        input method: select
+        select:
+          - yes: 1
+          - no: 0
+      - name: Micturition pains
+        description: Micturition pains { yes, no }
+        index: 4
+        input method: select
+        select:
+          - yes: 1
+          - no: 0
+      - name: Burning of urethra, itch, swelling of urethra outlet
+        description: Burning of urethra, itch, swelling of urethra outlet { yes, no }
+        index: 5
+        input method: select
+        select:
+          - yes: 1
+          - no: 0
+    output:
+      description:
+      result:
+        - 0: Normal
+        - 1: Inflammation of urinary bladder
+        - 2: Nephritis of renal pelvis origin
+        - 3: Inflammation of urinary bladder and Nephritis of renal pelvis origin
+
+  Breast Cancer:
+    index: 1
+    positions: ["chest"]
+    description: "Breast cancer is a type of cancer that begins in the cells of the breast. It can occur in both men and women, but it is more common in women. Breast cancer typically forms as a tumor in the breast tissue and can spread to other parts of the body if left untreated. Early detection through screenings, such as mammograms, is crucial for successful treatment. Common symptoms include lumps or thickening in the breast, changes in breast shape or size, and nipple discharge. Treatment options may include surgery, chemotherapy, radiation therapy, and hormone therapy."
+    inputs:
+      - name: Age range
+        description:
+        index: 0
+        input method: select
+        select:
+          - 10-19: 1
+          - 20-29: 2
+          - 30-39: 3
+          - 40-49: 4
+          - 50-59: 5
+          - 60-69: 6
+          - 70-79: 7
+          - 80-89: 8
+          - 90-99: 9
+      - name: Menopause
+        description:
+        index: 1
+        input method: select
+        select:
+          - lt40: 0
+          - ge40: 1
+          - premeno: 2
+      - name: Tumor size
+        description:
+        index: 2
+        input method: select
+        select:
+          - 0-4: 0
+          - 5-9: 1
+          - 10-14: 2
+          - 15-19: 3
+          - 20-24: 4
+          - 25-29: 5
+          - 30-34: 6
+          - 35-39: 7
+          - 40-44: 8
+          - 45-49: 9
+          - 50-54: 10
+          - 55-59: 11
+      - name: Inv nodes
+        description:
+        index: 3
+        input method: select
+        select:
+          - 0-2: 0
+          - 3-5: 1
+          - 6-8: 2
+          - 9-11: 3
+          - 12-14: 4
+          - 15-17: 5
+          - 18-20: 6
+          - 21-23: 7
+          - 24-26: 8
+          - 27-29: 9
+          - 30-32: 10
+          - 33-35: 11
+          - 36-39: 12
+      - name: Node caps
+        description:
+        index: 4
+        input method: select
+        select:
+          - yes: 0
+          - no: 1
+      - name: Deg-malig
+        description:
+        index: 5
+        input method: select
+        select:
+          - 1: 0
+          - 2: 1
+          - 3: 2
+      - name: Breast
+        description:
+        index: 6
+        input method: select
+        select:
+          - left: 0
+          - right: 1
+      - name: Breast quad
+        description:
+        index: 7
+        input method: select
+        select:
+          - left-up: 0
+          - left-low: 1
+          - right-up: 2
+          - right-low: 3
+          - center: 4
+      - name: Irradiat
+        description:
+        index: 8
+        input method: select
+        select:
+          - yes: 0
+          - no: 1
+    output:
+      description: Class
+      result:
+        - 0: No recurrence events
+        - 1: Recurrence events
+
+  Chronic Kidney Disease:
+    index: 2
+    positions: ["head", "lowerAbdomen", "chest", "limbs"]
+    description: "Chronic Kidney Disease (CKD) is a long-term condition where the kidneys gradually lose their function over time. This can lead to a buildup of waste and fluid in the body, causing various complications. Common causes include diabetes, high blood pressure, and certain genetic conditions. Symptoms may not be apparent in the early stages, but as the disease progresses, individuals may experience fatigue, swelling, and changes in urination patterns. Management involves medication, dietary changes, and, in severe cases, dialysis or kidney transplant. Early detection and lifestyle modifications are crucial for slowing the disease's progression."
+    inputs:
+      - name: Age
+        description: age in years
+        index: 0
+        input_max: 120
+        input_min: 6
+        input_decimal_length: 0
+        warn: Please enter an integer between 6 and 120
+        input method: input
+        select:
+          - years old: 0
+      - name: Blood pressure
+        description: Blood Pressure(numerical) bp in mm/Hg
+        index: 1
+        input_max: 110
+        input_min: 50
+        input_decimal_length: 0
+        warn: Please enter an integer between 50 and 110
+        input method: input
+        select:
+          - mm/Hg: 0
+      - name: Specific gravity
+        description: Specific Gravity(nominal)
+        index: 2
+        input_max: 1.030
+        input_min: 1.000
+        input_decimal_length: 3
+        warn: Please enter between 1.000 and 1.030 with a scale of 3 or less
+        input method: input
+        select:
+          - "%": 0
+      - name: Alibumin
+        description: Albumin(nominal)
+        index: 3
+        input method: select
+        select:
+          - 0: 0
+          - 1: 1
+          - 2: 2
+          - 3: 3
+          - 4: 4
+          - 5: 5
+      - name: Sugar
+        description:
+        index: 4
+        input method: select
+        select:
+          - 0: 0
+          - 1: 1
+          - 2: 2
+          - 3: 3
+          - 4: 4
+          - 5: 5
+      - name: Read blood cells
+        description:
+        index: 5
+        input method: select
+        select:
+          - normal: 0
+          - abnormal: 1
+      - name: Pus cell
+        description:
+        index: 6
+        input method: select
+        select:
+          - normal: 0
+          - abnormal: 1
+      - name: Pus cell clumps
+        description:
+        index: 7
+        input method: select
+        select:
+          - not present: 0
+          - present: 1
+      - name: Bacteria
+        description:
+        index: 8
+        input method: select
+        select:
+          - not present: 0
+          - present: 1
+      - name: Blood glucose random
+        description:
+        index: 9
+        input_max: 490
+        input_min: 70
+        input_decimal_length: 0
+        warn: Please enter an integer between 70 and 490
+        input method: input
+        select:
+          - mgs/dl: 0
+      - name: Blood urea
+        description:
+        index: 10
+        input_max: 309
+        input_min: 10
+        input_decimal_length: 0
+        warn: Please enter an integer between 10 and 390
+        input method: input
+        select:
+          - mgs/dl: 0
+      - name: Serum creatinine
+        description:
+        index: 11
+        input_max: 15.2
+        input_min: 0.4
+        input_decimal_length: 1
+        warn: Please enter between 0.4 and 15.2 with a scale of 1 or less
+        input method: input
+        select:
+          - mgs/dl: 0
+      - name: Sodium
+        description:
+        index: 12
+        input_max: 150
+        input_min: 111
+        input_decimal_length: 0
+        warn: Please enter an integer between 111 and 150
+        input method: input
+        select:
+          - mEq/L: 0
+      - name: Potassium
+        description:
+        index: 13
+        input_max: 47.0
+        input_min: 2.5
+        input_decimal_length: 1
+        warn: Please enter between 2.5 and 47.0 with a scale of 1 or less
+        input method: input
+        select:
+          - mEq/L: 0
+      - name: Hemoglobin
+        description:
+        index: 14
+        input_max: 17.8
+        input_min: 3.1
+        input_decimal_length: 1
+        warn: Please enter between 3.1 and 17.8 with a scale of 1 or less
+        input method: input
+        select:
+          - gms: 0
+      - name: Packed cell volume
+        description:
+        index: 15
+        input_max: 54.0
+        input_min: 9.8
+        input_decimal_length: 1
+        warn: Please enter between 9.8 and 54.0 with a scale of 1 or less
+        input method: input
+        select:
+          - numerical: 0
+      - name: White blood cell count
+        description:
+        index: 16
+        input_max: 26400
+        input_min: 3800
+        input_decimal_length: 0
+        warn: Please enter an integer between 3800 and 26400
+        input method: input
+        select:
+          - cells/cumm: 0
+      - name: Red blood cell count
+        description:
+        index: 17
+        input_max: 8.0
+        input_min: 2.1
+        input_decimal_length: 1
+        warn: Please enter between 2.1 and 8.0 with a scale of 1 or less
+        input method: input
+        select:
+          - millions/cmm: 0
+      - name: Hypertension
+        description:
+        index: 18
+        input method: select
+        select:
+          - yes: 0
+          - no: 1
+      - name: Diabetes
+        description:
+        index: 19
+        input method: select
+        select:
+          - yes: 0
+          - no: 1
+      - name: Coronary artery disease
+        description:
+        index: 20
+        input method: select
+        select:
+          - yes: 0
+          - no: 1
+      - name: Appetite
+        description:
+        index: 21
+        input method: select
+        select:
+          - poor: 0
+          - good: 1
+      - name: Pedal edema
+        description:
+        index: 22
+        input method: select
+        select:
+          - yes: 0
+          - no: 1
+      - name: Anemia
+        description:
+        index: 23
+        input method: select
+        select:
+          - yes: 0
+          - no: 1
+    output:
+      description: Class
+      result:
+        - 0: Not chronic kidney disease
+        - 1: Chronic kidney disease
+
+  Heart Disease:
+    index: 3
+    positions: ["chest"]
+    description: "Heart disease refers to a range of conditions that affect the heart's function and blood vessels. It includes conditions such as coronary artery disease, heart failure, and arrhythmias. Risk factors include high blood pressure, high cholesterol, smoking, obesity, and diabetes. Symptoms vary depending on the specific condition but may include chest pain, shortness of breath, fatigue, and irregular heartbeat. Diagnosis involves medical history, physical exams, and tests like electrocardiograms and angiograms. Treatment options include lifestyle changes, medication, and in severe cases, procedures like angioplasty or bypass surgery. Early detection, risk factor management, and adopting a heart-healthy lifestyle are essential for preventing heart disease."
+    inputs:
+      - name: Age
+        description: age in years
+        index: 0
+        input_max: 120
+        input_min: 6
+        input_decimal_length: 0
+        warn: Please enter an integer between 6 and 120
+        input method: input
+        select:
+          - years old: 0
+      - name: Sex
+        description:  sex
+        index: 1
+        input method: select
+        select:
+          - female: 0
+          - male: 1
+      - name: Chest pain type
+        description: chest pain type
+        index: 2
+        input method: select
+        select:
+          - typical angina: 1
+          - atypical angina: 2
+          - non-anginal pain: 3
+          - asymptomatic: 4
+      - name: Trestbps
+        description: resting blood pressure (in mm Hg on admission to the hospital)
+        index: 3
+        input_max: 200
+        input_min: 94
+        input_decimal_length: 0
+        warn: Please enter an integer between 94 and 200
+        input method: input
+        select:
+          - mm/Hg: 0
+      - name: Cholestoral
+        description: serum cholestoral in mg/dl
+        index: 4
+        input_max: 564
+        input_min: 126
+        input_decimal_length: 0
+        warn: Please enter an integer between 126 and 564
+        input method: input
+        select:
+          - mg/dl: 0
+      - name: Fasting blood sugar
+        description: fasting blood sugar > 120 mg/dl
+        index: 5
+        input method: select
+        select:
+          - yes: 1
+          - no: 0
+      - name: Resting electrocardiographic
+        description: resting electrocardiographic results
+        index: 6
+        input method: select
+        select:
+          - normal: 0
+          - having ST-T wave abnormality: 1
+          - showing probable or definite left ventricular hypertrophy by Estes' criteria: 2
+      - name: Thalach
+        description: maximum heart rate achieved
+        index: 7
+        input_max: 202
+        input_min: 71
+        input_decimal_length: 0
+        warn: Please enter an integer between 71 and 202
+        input method: input
+        select:
+          - beats per minute: 0
+      - name: Exercise induced angina
+        description: exercise induced angina
+        index: 8
+        input method: select
+        select:
+          - no: 0
+          - yes: 1
+      - name: ST depression induced by exercise relative to rest
+        description: ST depression induced by exercise relative to rest
+        index: 9
+        input_max: 6.2
+        input_min: 0
+        input_decimal_length: 1
+        warn: Please enter between 0 and 6.2 with a scale of 1 or less
+        input method: input
+        select:
+          - mm: 0
+      - name: Slope
+        description: the slope of the peak exercise ST segment
+        index: 10
+        input method: select
+        select:
+          - upsloping: 1
+          - flat: 2
+          - downsloping: 3
+      - name: Number of major vessels colored by flourosopy
+        description: number of major vessels (0-3) colored by flourosopy
+        index: 11
+        input method: select
+        select:
+          - 0: 0
+          - 1: 1
+          - 2: 2
+          - 3: 3
+      - name: Thalassemia
+        description:
+        index: 12
+        input method: select
+        select:
+          - normal: 3
+          - fixed defect: 6
+          - reversable defect: 7
+    output:
+      description: The probability of suffering from heart disease
+      result:
+        - 0: "0%"
+        - 1: "25%"
+        - 2: "50%"
+        - 3: "75%"
+        - 4: "100%"
+
+  Heart Failure Clinical Records:
+    index: 4
+    positions: ["chest"]
+    description: "Heart failure clinical records contain a patient's medical history, diagnostic test results (e.g., echocardiograms, ECGs), medication regimens, and treatment plans. They also document symptoms, such as shortness of breath, edema, and fatigue, along with the patient's functional status. Clinical records track vital signs, including blood pressure and heart rate, and may include laboratory data, like B-type natriuretic peptide levels. These records serve as a comprehensive guide for healthcare providers, enabling them to assess disease progression, adjust treatments, and monitor the patient's response to therapy. Regular updates to these records are crucial for managing heart failure effectively."
+    inputs:
+      - name: Age
+        description: age of the patient
+        index: 0
+        input_max: 120
+        input_min: 6
+        input_decimal_length: 0
+        warn: Please enter an integer between 6 and 120
+        input method: input
+        select:
+          - years old: 0
+      - name: Anemia
+        description: decrease of red blood cells or hemoglobin
+        index: 1
+        input method: select
+        select:
+          - no: 0
+          - yes: 1
+      - name: Creatinine phosphokinase
+        description: level of the CPK enzyme in the blood (mcg/L)
+        index: 2
+        input_max: 7861
+        input_min: 23
+        input_decimal_length: 0
+        warn: Please enter an integer between 23 and 7861
+        input method: input
+        select:
+          - mcg/L: 0
+      - name: Diabetes
+        description: if the patient has diabetes
+        index: 3
+        input method: select
+        select:
+          - no: 0
+          - yes: 1
+      - name: Ejection fraction
+        description: percentage of blood leaving the heart at each contraction (percentage)
+        index: 4
+        input_max: 80
+        input_min: 14
+        input_decimal_length: 0
+        warn: Please enter an integer between 14 and 80
+        input method: input
+        select:
+          - "%": 0
+      - name: High blood pressure
+        description:
+        index: 5
+        input method: select
+        select:
+          - no: 0
+          - yes: 1
+      - name: Platelets
+        description: platelets in the blood (kiloplatelets/mL)
+        index: 6
+        input_max: 850000
+        input_min: 25100
+        input_decimal_length: 0
+        warn: Please enter an integer between 25100 and 850000
+        input method: input
+        select:
+          - kiloplatelets/mL: 0
+      - name: Serum creatinine
+        description: level of serum creatinine in the blood (mg/dL)
+        index: 7
+        input_max: 9.4
+        input_min: 0.5
+        input_decimal_length: 1
+        warn: Please enter between 0.5 and 9.4 with a scale of 1 or less
+        input method: input
+        select:
+          - mg/dL: 0
+      - name: Serum sodium
+        description: level of serum sodium in the blood (mEq/L)
+        index: 8
+        input_max: 148.0
+        input_min: 113.0
+        input_decimal_length: 1
+        warn: Please enter between 113.0 and 148.0 with a scale of 1 or less
+        input method: input
+        select:
+          - mEq/L: 0
+      - name: Sex
+        description: woman or man
+        index: 9
+        input method: select
+        select:
+          - female: 0
+          - male: 1
+      - name: Smoking
+        description: if the patient smokes or not (boolean)
+        index: 10
+        input method: select
+        select:
+          - no: 0
+          - yes: 1
+      - name: Time
+        description: follow-up period (days)
+        index: 11
+        input_max: 285
+        input_min: 4
+        input_decimal_length: 0
+        warn: Please enter an integer between 4 and 285
+        input method: input
+        select:
+          - days: 0
+    output:
+      description: Death event
+      result:
+        - 0: no
+        - 1: yes
+
+  Lymphography:
+    index: 5
+    positions: ["head", "neck", "chest", "abdomen", "lowerAbdomen", "limbs"]
+    description: "Lymphography is a diagnostic imaging procedure used to visualize the lymphatic system. Contrast dye is injected into the lymphatic vessels, allowing them to be seen on X-ray or other imaging modalities. It helps identify blockages, abnormalities, or diseases affecting the lymph nodes and lymphatic vessels. Lymphography can aid in the diagnosis of conditions such as lymphedema, lymphoma, or infections. The procedure involves minimal discomfort, and the results provide valuable information for treatment planning. However, with the advancement of other imaging techniques, such as CT or MRI, lymphography is now less commonly used but may still have specific clinical indications."
+    inputs:
+      - name: Lymphatics
+        description: normal, arched, deformed, displaced
+        index: 0
+        inputs method: select
+        select:
+          - normal: 1
+          - arched: 2
+          - deformed: 3
+          - displaced: 4
+      - name: Block of affere
+        description: no, yes
+        index: 1
+        inputs method: select
+        select:
+          - no: 1
+          - yes: 2
+      - name: Bl of lymph c
+        description: no, yes
+        index: 2
+        inputs method: select
+        select:
+          - no: 1
+          - yes: 2
+      - name: Bl of lymph s
+        description: no, yes
+        index: 3
+        inputs method: select
+        select:
+          - no: 1
+          - yes: 2
+      - name: By pass
+        description: no, yes
+        index: 4
+        inputs method: select
+        select:
+          - no: 1
+          - yes: 2
+      - name: Extravasates
+        description: no, yes
+        index: 5
+        inputs method: select
+        select:
+          - no: 1
+          - yes: 2
+      - name: Regeneration of
+        description: no, yes
+        index: 6
+        inputs method: select
+        select:
+          - no: 1
+          - yes: 2
+      - name: Early uptake in
+        description: no, yes
+        index: 7
+        inputs method: select
+        select:
+          - no: 1
+          - yes: 2
+      - name: Lym nodes dimin
+        description: 0-3
+        index: 8
+        inputs method: select
+        select:
+          - 0: 0
+          - 1: 1
+          - 2: 2
+          - 3: 3
+      - name: Lym nodes enlar
+        description: 1-4
+        index: 9
+        inputs method: select
+        select:
+          - 1: 1
+          - 2: 2
+          - 3: 3
+          - 4: 4
+      - name: Changes in lym
+        description: bean, oval, round
+        index: 10
+        inputs method: select
+        select:
+          - bean: 1
+          - oval: 2
+          - round: 3
+      - name: Defect in node
+        description: no, lacunar, lac. marginal, lac. central
+        index: 11
+        inputs method: select
+        select:
+          - no: 1
+          - lacunar: 2
+          - lac  marginal: 3
+          - lac  central: 4
+      - name: Changes in node
+        description: no, lacunar, lac. margin, lac. central
+        index: 12
+        inputs method: select
+        select:
+          - no: 1
+          - lacunar: 2
+          - lac. margin: 3
+          - lac. central: 4
+      - name: Changes in stru
+        description: no, grainy, drop-like, coarse, diluted, reticular, stripped, faint,
+        index: 13
+        inputs method: select
+        select:
+          - no: 1
+          - grainy: 2
+          - drop-like: 3
+          - coarse: 4
+          - diluted: 5
+          - reticular: 6
+          - stripped: 7
+          - faint: 8
+      - name: Special forms
+        description: no, chalices, vesicles
+        index: 14
+        inputs method: select
+        select:
+          - no: 1
+          - chalices: 2
+          - vesicles: 3
+      - name: Dislocation of
+        description: no, yes
+        index: 15
+        inputs method: select
+        select:
+          - no: 1
+          - yes: 2
+      - name: Exclusion of no
+        description: no, yes
+        index: 16
+        inputs method: select
+        select:
+          - no: 1
+          - yes: 2
+      - name: No of nodes in
+        description:
+        index: 17
+        inputs method: select
+        select:
+          - 0-9: 0
+          - 10-19: 1
+          - 20-29: 2
+          - 30-39: 3
+          - 40-49: 4
+          - 50-59: 5
+          - 60-69: 6
+          - ">=70": 7
+    output:
+      description: Class
+      result:
+        - 0: normal find
+        - 1: metastases
+        - 2: malign lymph
+        - 3: fibrosis
+
+  Parkinsons:
+    index: 6
+    positions: ["head", "limbs"]
+    description: "Parkinson's disease is a neurodegenerative disorder affecting movement. It is characterized by tremors, bradykinesia, rigidity, and postural instability. The condition results from the loss of dopamine-producing cells in the brain. Symptoms also include changes in speech and writing, as well as non-motor issues like cognitive impairment and depression. While the exact cause is unknown, both genetic and environmental factors are believed to play a role. Treatment involves medication, physical therapy, and in some cases, deep brain stimulation. Although there is currently no cure, early detection and management can significantly improve quality of life for individuals with Parkinson's."
+    inputs:
+      - name: "MDVP:Fo(Hz)"
+        description: Average vocal fundamental frequency
+        index: 0
+        input_max: 260.105
+        input_min: 88.333
+        input_decimal_length: 3
+        warn: Please enter between 88.333 and 260.105 with a scale of 3 or less
+        input method: input
+        select:
+          - Hz: 0
+      - name: "MDVP:Fhi(Hz)"
+        description: Maximum vocal fundamental frequency
+        index: 1
+        input_max: 592.03
+        input_min: 102.145
+        input_decimal_length: 3
+        warn: Please enter between 102.145 and 592.03 with a scale of 3 or less
+        input method: input
+        select:
+          - Hz: 0
+      - name: "MDVP:Flo(Hz)"
+        description: Minimum vocal fundamental frequency
+        index: 2
+        input_max: 239.17
+        input_min: 65.476
+        input_decimal_length: 3
+        warn: Please enter between 65.476 and 239.17 with a scale of 3 or less
+        input method: input
+        select:
+          - Hz: 0
+      - name: "MDVP-Jitter"
+        description:
+        index: 3
+        input_max: 0.03316
+        input_min: 0.00168
+        input_decimal_length: 5
+        warn: Please enter between 0.00168 and 0.03316 with a scale of 5 or less
+        input method: input
+        select:
+          - "%": 0
+      - name: "MDVP:Jitter(Abs)"
+        description: Several measures of variation in fundamental frequency
+        index: 4
+        input_max: 0.00026
+        input_min: 0.000007
+        input_decimal_length: 6
+        warn: Please enter between 0.000007 and 0.00026 with a scale of 6 or less
+        input method: input
+        select:
+          - "%": 0
+      - name: "MDVP:RAP"
+        description: Several measures of variation in fundamental frequency
+        index: 5
+        input_max: 0.02144
+        input_min: 0.00068
+        input_decimal_length: 5
+        warn: Please enter between 0.00068 and 0.02144 with a scale of 5 or less
+        input method: input
+        select:
+          - "%": 0
+      - name: "MDVP:PPQ"
+        description: Several measures of variation in fundamental frequency
+        index: 6
+        input_max: 0.01958
+        input_min: 0.00092
+        input_decimal_length: 5
+        warn: Please enter between 0.00092 and 0.01958 with a scale of 5 or less
+        input method: input
+        select:
+          - "%": 0
+      - name: "Jitter:DDP"
+        description: Several measures of variation in fundamental frequency
+        index: 7
+        input_max: 0.06433
+        input_min: 0.00204
+        input_decimal_length: 5
+        warn: Please enter between 0.00204 and 0.06433 with a scale of 5 or less
+        input method: input
+        select:
+          - "%": 0
+      - name: "MDVP:Shimmer"
+        description: Several measures of variation in amplitude
+        index: 8
+        input_max: 0.11908
+        input_min: 0.00954
+        input_decimal_length: 5
+        warn: Please enter between 0.00954 and 0.11908 with a scale of 5 or less
+        input method: input
+        select:
+          - "%": 0
+      - name: "MDVP:Shimmer(dB)"
+        description: Several measures of variation in amplitude
+        index: 9
+        input_max: 1.302
+        input_min: 0.085
+        input_decimal_length: 3
+        warn: Please enter between 0.085 and 1.302 with a scale of 3 or less
+        input method: input
+        select:
+          - "%": 0
+      - name: "Shimmer:APQ3"
+        description: Several measures of variation in amplitude
+        index: 10
+        input_max: 0.05647
+        input_min: 0.00455
+        input_decimal_length: 5
+        warn: Please enter between 0.00455 and 0.05647 with a scale of 5 or less
+        input method: input
+        select:
+          - "%": 0
+      - name: "Shimmer:APQ5"
+        description: Several measures of variation in amplitude
+        index: 11
+        input_max: 0.0794
+        input_min: 0.0057
+        input_decimal_length: 4
+        warn: Please enter between 0.0057 and 0.0794 with a scale of 4 or less
+        input method: input
+        select:
+          - "%": 0
+      - name: "MDVP:APQ"
+        description: Several measures of variation in amplitude
+        index: 12
+        input_max: 0.13778
+        input_min: 0.00719
+        input_decimal_length: 5
+        warn: Please enter between 0.00719 and 0.13778 with a scale of 5 or less
+        input method: input
+        select:
+          - "%": 0
+      - name: "Shimmer:DDA"
+        description: Several measures of variation in amplitude
+        index: 13
+        input_max: 0.16942
+        input_min: 0.01364
+        input_decimal_length: 5
+        warn: Please enter between 0.01364 and 0.16942 with a scale of 5 or less
+        input method: input
+        select:
+          - "%": 0
+      - name: NHR
+        description: Two measures of ratio of noise to tonal components in the voice
+        index: 14
+        input_max: 0.31482
+        input_min: 0.00065
+        input_decimal_length: 5
+        warn: Please enter between 0.00065 and 0.31482 with a scale of 5 or less
+        input method: input
+        select:
+          - "%": 0
+      - name: HNR
+        description: Two measures of ratio of noise to tonal components in the voice
+        index: 15
+        input_max: 33.047
+        input_min: 8.441
+        input_decimal_length: 3
+        warn: Please enter between 8.441 and 33.047 with a scale of 3 or less
+        input method: input
+        select:
+          - "%": 0
+      - name: RPDE
+        description: Two nonlinear dynamical complexity measures
+        index: 16
+        input_max: 0.685151
+        input_min: 0.25657
+        input_decimal_length: 6
+        warn: Please enter between 0.25657 and 0.685151 with a scale of 6 or less
+        input method: input
+        select:
+          - bits: 0
+      - name: DFA
+        description: Signal fractal scaling exponent
+        index: 17
+        input_max: 0.825288
+        input_min: 0.574282
+        input_decimal_length: 6
+        warn: Please enter between 0.574282 and 0.825288 with a scale of 6 or less
+        input method: input
+        select:
+          - "α": 0
+      - name: Spread1
+        description: Three nonlinear measures of fundamental frequency variation
+        index: 18
+        input_max: -2.434031
+        input_min: -7.964984
+        input_decimal_length: 6
+        warn: Please enter between -7.964984 and -2.434031 with a scale of 6 or less
+        input method: input
+        select:
+          - Hz: 0
+      - name: Spread2
+        description: Three nonlinear measures of fundamental frequency variation
+        index: 19
+        input_max: 0.450493
+        input_min: 0.006274
+        input_decimal_length: 6
+        warn: Please enter between 0.006274 and 0.450493 with a scale of 6 or less
+        input method: input
+        select:
+          - Hz: 0
+      - name: D2
+        description: Two nonlinear dynamical complexity measures
+        index: 20
+        input_max: 3.671155
+        input_min: 1.423287
+        input_decimal_length: 6
+        warn: Please enter between 1.423287 and 3.671155 with a scale of 6 or less
+        input method: input
+        select:
+          - bits: 0
+      - name: PPE
+        description: Three nonlinear measures of fundamental frequency variation
+        index: 21
+        input_max: 0.527367
+        input_min: 0.044539
+        input_decimal_length: 6
+        warn: Please enter between 0.044539 and 0.527367 with a scale of 6 or less
+        input method: input
+        select:
+          - Hz: 0
+    output:
+      description: Status Health status of the subject
+      result:
+        - 0: Healthy
+        - 1: Parkinson's

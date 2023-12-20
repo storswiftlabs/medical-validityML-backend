@@ -1,0 +1,2459 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "medical-zkml(giza)",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "diseases"
+    },
+    {
+      "name": "operator"
+    },
+    {
+      "name": "user"
+    }
+  ],
+  "paths": {
+    "/api/diseases/disease_info": {
+      "post": {
+        "summary": "disease information",
+        "x-apifox-folder": "diseases",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "diseases"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "disease": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "disease",
+                  "id"
+                ],
+                "x-apifox-orders": [
+                  "disease",
+                  "id"
+                ],
+                "x-apifox-ignore-properties": []
+              },
+              "example": {
+                "disease": "Heart Failure Clinical Records",
+                "id": 111
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ok": {
+                      "type": "boolean"
+                    },
+                    "msg": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": "string"
+                        },
+                        "inputs": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "name": {
+                                "type": "string"
+                              },
+                              "description": {
+                                "type": "string"
+                              },
+                              "index": {
+                                "type": "integer"
+                              },
+                              "regular": {
+                                "type": "string"
+                              },
+                              "warn": {
+                                "type": "string"
+                              },
+                              "input_method": {
+                                "type": "string"
+                              },
+                              "select": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "key": {
+                                      "type": "string"
+                                    },
+                                    "value": {
+                                      "type": "integer"
+                                    }
+                                  },
+                                  "required": [
+                                    "key",
+                                    "value"
+                                  ],
+                                  "x-apifox-ignore-properties": [],
+                                  "x-apifox-orders": [
+                                    "key",
+                                    "value"
+                                  ]
+                                }
+                              },
+                              "default": {
+                                "type": "object",
+                                "properties": {
+                                  "key": {
+                                    "type": "null"
+                                  },
+                                  "value": {
+                                    "type": "null"
+                                  }
+                                },
+                                "required": [
+                                  "key",
+                                  "value"
+                                ],
+                                "x-apifox-ignore-properties": [],
+                                "x-apifox-orders": [
+                                  "key",
+                                  "value"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "name",
+                              "description",
+                              "index",
+                              "regular",
+                              "warn",
+                              "input_method",
+                              "select",
+                              "default"
+                            ],
+                            "x-apifox-ignore-properties": [],
+                            "x-apifox-orders": [
+                              "name",
+                              "description",
+                              "index",
+                              "regular",
+                              "warn",
+                              "input_method",
+                              "select",
+                              "default"
+                            ]
+                          }
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "description",
+                        "inputs"
+                      ],
+                      "x-apifox-ignore-properties": [],
+                      "x-apifox-orders": [
+                        "name",
+                        "description",
+                        "inputs"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "ok",
+                    "msg",
+                    "data"
+                  ],
+                  "x-apifox-ignore-properties": [],
+                  "x-apifox-orders": [
+                    "ok",
+                    "msg",
+                    "data"
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "Success example",
+                    "value": {
+                      "ok": true,
+                      "msg": "",
+                      "data": {
+                        "name": "Acute Inflammations",
+                        "description": "",
+                        "inputs": [
+                          {
+                            "name": "Temperature",
+                            "description": "Temperature of patient { 35C-42C }",
+                            "index": 0,
+                            "regular": "^(3[4-9]|[4-9][0-9]|46(\\.[0-5])?)$",
+                            "warn": "Please enter a number between 34 and 46.5",
+                            "input_method": "input",
+                            "select": [
+                              {
+                                "key": "celsius",
+                                "value": 0
+                              }
+                            ],
+                            "default": {
+                              "key": null,
+                              "value": null
+                            }
+                          },
+                          {
+                            "name": "Occurrence of nausea",
+                            "description": "Occurrence of nausea { yes, no }",
+                            "index": 1,
+                            "regular": "",
+                            "warn": "",
+                            "input_method": "select",
+                            "select": [
+                              {
+                                "key": "yes",
+                                "value": 1
+                              },
+                              {
+                                "key": "no",
+                                "value": 0
+                              }
+                            ],
+                            "default": {
+                              "key": null,
+                              "value": null
+                            }
+                          },
+                          {
+                            "name": "Lumbar pain",
+                            "description": "Lumbar pain { yes, no }",
+                            "index": 2,
+                            "regular": "",
+                            "warn": "",
+                            "input_method": "select",
+                            "select": [
+                              {
+                                "key": "yes",
+                                "value": 1
+                              },
+                              {
+                                "key": "no",
+                                "value": 0
+                              }
+                            ],
+                            "default": {
+                              "key": null,
+                              "value": null
+                            }
+                          },
+                          {
+                            "name": "Urine pushing",
+                            "description": "Urine pushing (continuous need for urination) { yes, no }",
+                            "index": 3,
+                            "regular": "",
+                            "warn": "",
+                            "input_method": "select",
+                            "select": [
+                              {
+                                "key": "yes",
+                                "value": 1
+                              },
+                              {
+                                "key": "no",
+                                "value": 0
+                              }
+                            ],
+                            "default": {
+                              "key": null,
+                              "value": null
+                            }
+                          },
+                          {
+                            "name": "Micturition pains",
+                            "description": "Micturition pains { yes, no }",
+                            "index": 4,
+                            "regular": "",
+                            "warn": "",
+                            "input_method": "select",
+                            "select": [
+                              {
+                                "key": "yes",
+                                "value": 1
+                              },
+                              {
+                                "key": "no",
+                                "value": 0
+                              }
+                            ],
+                            "default": {
+                              "key": null,
+                              "value": null
+                            }
+                          },
+                          {
+                            "name": "Burning of urethra, itch, swelling of urethra outlet",
+                            "description": "Burning of urethra, itch, swelling of urethra outlet { yes, no }",
+                            "index": 5,
+                            "regular": "",
+                            "warn": "",
+                            "input_method": "select",
+                            "select": [
+                              {
+                                "key": "yes",
+                                "value": 1
+                              },
+                              {
+                                "key": "no",
+                                "value": 0
+                              }
+                            ],
+                            "default": {
+                              "key": null,
+                              "value": null
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3673043/apis/api-129056728-run",
+        "security": []
+      },
+      "get": {
+        "summary": "disease information",
+        "x-apifox-folder": "diseases",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "diseases"
+        ],
+        "parameters": [
+          {
+            "name": "disease",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "example": "Parkinsons",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ok": {
+                      "type": "boolean"
+                    },
+                    "msg": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": "string"
+                        },
+                        "inputs": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "name": {
+                                "type": "string"
+                              },
+                              "description": {
+                                "type": "string"
+                              },
+                              "index": {
+                                "type": "integer"
+                              },
+                              "input_max": {
+                                "type": "number"
+                              },
+                              "input_min": {
+                                "type": "number"
+                              },
+                              "warn": {
+                                "type": "string"
+                              },
+                              "input_method": {
+                                "type": "string"
+                              },
+                              "select": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "key": {
+                                      "type": "string"
+                                    },
+                                    "value": {
+                                      "type": "integer"
+                                    }
+                                  },
+                                  "required": [
+                                    "key",
+                                    "value"
+                                  ],
+                                  "x-apifox-ignore-properties": [],
+                                  "x-apifox-orders": [
+                                    "key",
+                                    "value"
+                                  ]
+                                }
+                              }
+                            },
+                            "required": [
+                              "name",
+                              "description",
+                              "index",
+                              "input_max",
+                              "input_min",
+                              "warn",
+                              "input_method",
+                              "select"
+                            ],
+                            "x-apifox-ignore-properties": [],
+                            "x-apifox-orders": [
+                              "name",
+                              "description",
+                              "index",
+                              "input_max",
+                              "input_min",
+                              "warn",
+                              "input_method",
+                              "select"
+                            ]
+                          }
+                        },
+                        "output": {
+                          "type": "object",
+                          "properties": {
+                            "description": {
+                              "type": "string"
+                            },
+                            "result": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "key": {
+                                    "type": "string"
+                                  },
+                                  "value": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "key",
+                                  "value"
+                                ],
+                                "x-apifox-ignore-properties": [],
+                                "x-apifox-orders": [
+                                  "key",
+                                  "value"
+                                ]
+                              }
+                            }
+                          },
+                          "required": [
+                            "description",
+                            "result"
+                          ],
+                          "x-apifox-ignore-properties": [],
+                          "x-apifox-orders": [
+                            "description",
+                            "result"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "description",
+                        "inputs",
+                        "output"
+                      ],
+                      "x-apifox-ignore-properties": [],
+                      "x-apifox-orders": [
+                        "name",
+                        "description",
+                        "inputs",
+                        "output"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "ok",
+                    "msg",
+                    "data"
+                  ],
+                  "x-apifox-ignore-properties": [],
+                  "x-apifox-orders": [
+                    "ok",
+                    "msg",
+                    "data"
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "Success example",
+                    "value": {
+                      "ok": true,
+                      "msg": "",
+                      "data": {
+                        "name": "Parkinsons",
+                        "description": "Parkinson's disease is a neurodegenerative disorder affecting movement. It is characterized by tremors, bradykinesia, rigidity, and postural instability. The condition results from the loss of dopamine-producing cells in the brain. Symptoms also include changes in speech and writing, as well as non-motor issues like cognitive impairment and depression. While the exact cause is unknown, both genetic and environmental factors are believed to play a role. Treatment involves medication, physical therapy, and in some cases, deep brain stimulation. Although there is currently no cure, early detection and management can significantly improve quality of life for individuals with Parkinson's.",
+                        "inputs": [
+                          {
+                            "name": "MDVP:Fo(Hz)",
+                            "description": "Average vocal fundamental frequency",
+                            "index": 0,
+                            "input_max": 260.105,
+                            "input_min": 88.333,
+                            "warn": "Please enter a number between 88.333 and 260.105",
+                            "input_method": "input",
+                            "select": [
+                              {
+                                "key": "hz",
+                                "value": 0
+                              }
+                            ]
+                          },
+                          {
+                            "name": "MDVP:Fhi(Hz)",
+                            "description": "Maximum vocal fundamental frequency",
+                            "index": 1,
+                            "input_max": 592.03,
+                            "input_min": 102.145,
+                            "warn": "Please enter a number between 102.145 and 592.03",
+                            "input_method": "input",
+                            "select": [
+                              {
+                                "key": "hz",
+                                "value": 0
+                              }
+                            ]
+                          },
+                          {
+                            "name": "MDVP:Flo(Hz)",
+                            "description": "Minimum vocal fundamental frequency",
+                            "index": 2,
+                            "input_max": 239.17,
+                            "input_min": 65.476,
+                            "warn": "Please enter a number between 65.476 and 239.17",
+                            "input_method": "input",
+                            "select": [
+                              {
+                                "key": "hz",
+                                "value": 0
+                              }
+                            ]
+                          },
+                          {
+                            "name": "MDVP-Jitter",
+                            "description": "",
+                            "index": 3,
+                            "input_max": 0.03316,
+                            "input_min": 0.00168,
+                            "warn": "Please enter a number between 0.00168 and 0.03316",
+                            "input_method": "input",
+                            "select": [
+                              {
+                                "key": "%",
+                                "value": 0
+                              }
+                            ]
+                          },
+                          {
+                            "name": "MDVP:Jitter(Abs)",
+                            "description": "Several measures of variation in fundamental frequency",
+                            "index": 4,
+                            "input_max": 0.00026,
+                            "input_min": 0.000007,
+                            "warn": "Please enter a number between 0.000007 and 0.00026",
+                            "input_method": "input",
+                            "select": [
+                              {
+                                "key": "%",
+                                "value": 0
+                              }
+                            ]
+                          },
+                          {
+                            "name": "MDVP:RAP",
+                            "description": "Several measures of variation in fundamental frequency",
+                            "index": 5,
+                            "input_max": 0.02144,
+                            "input_min": 0.00068,
+                            "warn": "Please enter a number between 0.00068 and 0.02144",
+                            "input_method": "input",
+                            "select": [
+                              {
+                                "key": "%",
+                                "value": 0
+                              }
+                            ]
+                          },
+                          {
+                            "name": "MDVP:PPQ",
+                            "description": "Several measures of variation in fundamental frequency",
+                            "index": 6,
+                            "input_max": 0.01958,
+                            "input_min": 0.00092,
+                            "warn": "Please enter a number between 0.00092 and 0.01958",
+                            "input_method": "input",
+                            "select": [
+                              {
+                                "key": "%",
+                                "value": 0
+                              }
+                            ]
+                          },
+                          {
+                            "name": "Jitter:DDP",
+                            "description": "Several measures of variation in fundamental frequency",
+                            "index": 7,
+                            "input_max": 0.06433,
+                            "input_min": 0.00204,
+                            "warn": "Please enter a number between 0.00204 and 0.06433",
+                            "input_method": "input",
+                            "select": [
+                              {
+                                "key": "%",
+                                "value": 0
+                              }
+                            ]
+                          },
+                          {
+                            "name": "MDVP:Shimmer",
+                            "description": "Several measures of variation in amplitude",
+                            "index": 8,
+                            "input_max": 0.11908,
+                            "input_min": 0.00954,
+                            "warn": "Please enter a number between 0.00954 and 0.11908",
+                            "input_method": "input",
+                            "select": [
+                              {
+                                "key": "%",
+                                "value": 0
+                              }
+                            ]
+                          },
+                          {
+                            "name": "MDVP:Shimmer(dB)",
+                            "description": "Several measures of variation in amplitude",
+                            "index": 9,
+                            "input_max": 1.302,
+                            "input_min": 0.085,
+                            "warn": "Please enter a number between 0.085 and 1.302",
+                            "input_method": "input",
+                            "select": [
+                              {
+                                "key": "%",
+                                "value": 0
+                              }
+                            ]
+                          },
+                          {
+                            "name": "Shimmer:APQ3",
+                            "description": "Several measures of variation in amplitude",
+                            "index": 10,
+                            "input_max": 0.05647,
+                            "input_min": 0.00455,
+                            "warn": "Please enter a number between 0.00455 and 0.05647",
+                            "input_method": "input",
+                            "select": [
+                              {
+                                "key": "%",
+                                "value": 0
+                              }
+                            ]
+                          },
+                          {
+                            "name": "Shimmer:APQ5",
+                            "description": "Several measures of variation in amplitude",
+                            "index": 11,
+                            "input_max": 0.0794,
+                            "input_min": 0.0057,
+                            "warn": "Please enter a number between 0.0057 and 0.0794",
+                            "input_method": "input",
+                            "select": [
+                              {
+                                "key": "%",
+                                "value": 0
+                              }
+                            ]
+                          },
+                          {
+                            "name": "MDVP:APQ",
+                            "description": "Several measures of variation in amplitude",
+                            "index": 12,
+                            "input_max": 0.13778,
+                            "input_min": 0.00719,
+                            "warn": "Please enter a number between 0.00719 and 0.13778",
+                            "input_method": "input",
+                            "select": [
+                              {
+                                "key": "%",
+                                "value": 0
+                              }
+                            ]
+                          },
+                          {
+                            "name": "Shimmer:DDA",
+                            "description": "Several measures of variation in amplitude",
+                            "index": 13,
+                            "input_max": 0.16942,
+                            "input_min": 0.01364,
+                            "warn": "Please enter a number between 0.01364 and 0.16942",
+                            "input_method": "input",
+                            "select": [
+                              {
+                                "key": "%",
+                                "value": 0
+                              }
+                            ]
+                          },
+                          {
+                            "name": "NHR",
+                            "description": "Two measures of ratio of noise to tonal components in the voice",
+                            "index": 14,
+                            "input_max": 0.31482,
+                            "input_min": 0.00065,
+                            "warn": "Please enter a number between 0.00065 and 0.31482",
+                            "input_method": "input",
+                            "select": [
+                              {
+                                "key": "%",
+                                "value": 0
+                              }
+                            ]
+                          },
+                          {
+                            "name": "HNR",
+                            "description": "Two measures of ratio of noise to tonal components in the voice",
+                            "index": 15,
+                            "input_max": 33.047,
+                            "input_min": 8.441,
+                            "warn": "Please enter a number between 8.441 and 33.047",
+                            "input_method": "input",
+                            "select": [
+                              {
+                                "key": "%",
+                                "value": 0
+                              }
+                            ]
+                          },
+                          {
+                            "name": "RPDE",
+                            "description": "Two nonlinear dynamical complexity measures",
+                            "index": 16,
+                            "input_max": 0.685151,
+                            "input_min": 0.25657,
+                            "warn": "Please enter a number between 0.25657 and 0.685151",
+                            "input_method": "input",
+                            "select": [
+                              {
+                                "key": "bits",
+                                "value": 0
+                              }
+                            ]
+                          },
+                          {
+                            "name": "DFA",
+                            "description": "Signal fractal scaling exponent",
+                            "index": 17,
+                            "input_max": 0.825288,
+                            "input_min": 0.574282,
+                            "warn": "Please enter a number between 0.574282 and 0.825288",
+                            "input_method": "input",
+                            "select": [
+                              {
+                                "key": "α",
+                                "value": 0
+                              }
+                            ]
+                          },
+                          {
+                            "name": "Spread1",
+                            "description": "Three nonlinear measures of fundamental frequency variation",
+                            "index": 18,
+                            "input_max": -2.434031,
+                            "input_min": -7.964984,
+                            "warn": "Please enter a number between -7.964984 and -2.434031",
+                            "input_method": "input",
+                            "select": [
+                              {
+                                "key": "hz",
+                                "value": 0
+                              }
+                            ]
+                          },
+                          {
+                            "name": "Spread2",
+                            "description": "Three nonlinear measures of fundamental frequency variation",
+                            "index": 19,
+                            "input_max": 0.450493,
+                            "input_min": 0.006274,
+                            "warn": "Please enter a number between 0.006274 and 0.450493",
+                            "input_method": "input",
+                            "select": [
+                              {
+                                "key": "hz",
+                                "value": 0
+                              }
+                            ]
+                          },
+                          {
+                            "name": "D2",
+                            "description": "Two nonlinear dynamical complexity measures",
+                            "index": 20,
+                            "input_max": 3.671155,
+                            "input_min": 1.423287,
+                            "warn": "Please enter a number between 1.423287 and 3.671155",
+                            "input_method": "input",
+                            "select": [
+                              {
+                                "key": "bits",
+                                "value": 0
+                              }
+                            ]
+                          },
+                          {
+                            "name": "PPE",
+                            "description": "Three nonlinear measures of fundamental frequency variation",
+                            "index": 21,
+                            "input_max": 0.527367,
+                            "input_min": 0.044539,
+                            "warn": "Please enter a number between 0.044539 and 0.527367",
+                            "input_method": "input",
+                            "select": [
+                              {
+                                "key": "hz",
+                                "value": 0
+                              }
+                            ]
+                          }
+                        ],
+                        "output": {
+                          "description": "Status Health status of the subject",
+                          "result": [
+                            {
+                              "key": "0",
+                              "value": "Healthy"
+                            },
+                            {
+                              "key": "1",
+                              "value": "Parkinson's"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3673043/apis/api-131240913-run",
+        "security": []
+      }
+    },
+    "/api/diseases/diseases": {
+      "post": {
+        "summary": "classification of disease",
+        "x-apifox-folder": "diseases",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "diseases"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "chosen_user": {
+                    "type": "string"
+                  },
+                  "gender": {
+                    "type": "string"
+                  },
+                  "age": {
+                    "type": "integer"
+                  },
+                  "medical_condition": {
+                    "type": "object",
+                    "properties": {
+                      "diabetes": {
+                        "type": "string"
+                      },
+                      "obese": {
+                        "type": "string"
+                      },
+                      "hypertensive": {
+                        "type": "string"
+                      },
+                      "smoking": {
+                        "type": "string"
+                      },
+                      "injured": {
+                        "type": "string"
+                      },
+                      "cholesterol": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "diabetes",
+                      "obese",
+                      "hypertensive",
+                      "smoking",
+                      "injured",
+                      "cholesterol"
+                    ],
+                    "x-apifox-orders": [
+                      "diabetes",
+                      "obese",
+                      "hypertensive",
+                      "smoking",
+                      "injured",
+                      "cholesterol"
+                    ],
+                    "x-apifox-ignore-properties": []
+                  },
+                  "symptom_list": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "position": {
+                          "type": "string"
+                        },
+                        "symptoms": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "position",
+                        "symptoms"
+                      ],
+                      "required": [
+                        "position",
+                        "symptoms"
+                      ],
+                      "x-apifox-ignore-properties": []
+                    }
+                  }
+                },
+                "required": [
+                  "chosen_user",
+                  "gender",
+                  "age",
+                  "medical_condition",
+                  "symptom_list"
+                ],
+                "x-apifox-orders": [
+                  "chosen_user",
+                  "gender",
+                  "age",
+                  "medical_condition",
+                  "symptom_list"
+                ],
+                "x-apifox-ignore-properties": []
+              },
+              "example": {
+                "chosen_user": "my",
+                "gender": "female",
+                "age": 25,
+                "medical_condition": {
+                  "diabetes": "no",
+                  "obese": "no",
+                  "hypertensive": "no",
+                  "smoking": "no",
+                  "injured": "no",
+                  "cholesterol": "no"
+                },
+                "symptom_list": [
+                  {
+                    "position": "neck",
+                    "symptoms": [
+                      "Difficulty swallowing"
+                    ]
+                  },
+                  {
+                    "position": "chest",
+                    "symptoms": [
+                      "Shallow breathing"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ok": {
+                      "type": "boolean"
+                    },
+                    "count": {
+                      "type": "integer"
+                    },
+                    "msg": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer"
+                        },
+                        "diseases": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "name": {
+                                "type": "string"
+                              },
+                              "description": {
+                                "type": "string"
+                              },
+                              "positions": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              },
+                              "icon": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "name",
+                              "description",
+                              "positions",
+                              "icon"
+                            ],
+                            "x-apifox-ignore-properties": [],
+                            "x-apifox-orders": [
+                              "name",
+                              "description",
+                              "positions",
+                              "icon"
+                            ]
+                          }
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "diseases"
+                      ],
+                      "x-apifox-ignore-properties": [],
+                      "x-apifox-orders": [
+                        "id",
+                        "diseases"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "ok",
+                    "count",
+                    "msg",
+                    "data"
+                  ],
+                  "x-apifox-ignore-properties": [],
+                  "x-apifox-orders": [
+                    "ok",
+                    "count",
+                    "msg",
+                    "data"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3673043/apis/api-129056729-run",
+        "security": []
+      }
+    },
+    "/api/operator/module_list": {
+      "get": {
+        "summary": "Model List",
+        "x-apifox-folder": "operator",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "operator"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ok": {
+                      "type": "boolean"
+                    },
+                    "count": {
+                      "type": "integer"
+                    },
+                    "msg": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "name",
+                          "description"
+                        ],
+                        "x-apifox-ignore-properties": [],
+                        "x-apifox-orders": [
+                          "name",
+                          "description"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "ok",
+                    "count",
+                    "msg",
+                    "data"
+                  ],
+                  "x-apifox-ignore-properties": [],
+                  "x-apifox-orders": [
+                    "ok",
+                    "count",
+                    "msg",
+                    "data"
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "Success example",
+                    "value": {
+                      "ok": true,
+                      "count": 3,
+                      "msg": "ok",
+                      "data": [
+                        {
+                          "name": "XGBoost",
+                          "description": "XGBoost The idea of combining multiple weak learners into a strong classifier improves the model's predictive ability"
+                        },
+                        {
+                          "name": "Decision tree",
+                          "description": "The main advantage of decision trees is that they are easy to understand and interpret, and can handle continuous and discrete data, missing values, and other issues. However, due to the susceptibility of decision trees to overfitting and underfitting issues, attention should be paid to controlling the complexity and pruning techniques of the tree when using it."
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3673043/apis/api-129056730-run",
+        "security": []
+      }
+    },
+    "/api/operator/disease_prediction": {
+      "post": {
+        "summary": "Disease prediction",
+        "x-apifox-folder": "operator",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "operator"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "module": {
+                    "type": "string"
+                  },
+                  "inputs": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "index": {
+                          "type": "integer"
+                        },
+                        "select-key": {
+                          "type": "string"
+                        },
+                        "select-value": {
+                          "type": "string"
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "name",
+                        "index",
+                        "select-key",
+                        "select-value"
+                      ],
+                      "required": [
+                        "select-value",
+                        "select-key",
+                        "index",
+                        "name"
+                      ],
+                      "x-apifox-ignore-properties": []
+                    }
+                  }
+                },
+                "required": [
+                  "user",
+                  "name",
+                  "module",
+                  "inputs"
+                ],
+                "x-apifox-orders": [
+                  "user",
+                  "name",
+                  "module",
+                  "inputs"
+                ],
+                "x-apifox-ignore-properties": []
+              },
+              "example": {
+                "user": "0x01f5BB073e893d334FF9b0e239939982c124AF97",
+                "name": "Acute Inflammations",
+                "module": "Decision tree",
+                "inputs": [
+                  {
+                    "name": "Temperature",
+                    "index": 0,
+                    "select-key": "37,99",
+                    "select-value": "37,99"
+                  },
+                  {
+                    "name": "Occurrence of nausea",
+                    "index": 1,
+                    "select-key": "yes",
+                    "select-value": "1"
+                  },
+                  {
+                    "name": "Lumbar pain",
+                    "index": 2,
+                    "select-key": "yes",
+                    "select-value": "1"
+                  },
+                  {
+                    "name": "Urine pushing",
+                    "index": 3,
+                    "select-key": "yes",
+                    "select-value": "1"
+                  },
+                  {
+                    "name": "Micturition pains",
+                    "index": 4,
+                    "select-key": "yes",
+                    "select-value": "1"
+                  },
+                  {
+                    "name": "Burning of urethra, itch, swelling of urethra outlet",
+                    "index": 5,
+                    "select-key": "yes",
+                    "select-value": "1"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ok": {
+                      "type": "boolean"
+                    },
+                    "msg": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "null"
+                    }
+                  },
+                  "required": [
+                    "ok",
+                    "msg",
+                    "data"
+                  ],
+                  "x-apifox-ignore-properties": [],
+                  "x-apifox-orders": [
+                    "ok",
+                    "msg",
+                    "data"
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "Success example",
+                    "value": {
+                      "ok": true,
+                      "msg": "ok",
+                      "data": null
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3673043/apis/api-129056731-run",
+        "security": []
+      }
+    },
+    "/api/operator/recommend": {
+      "post": {
+        "summary": "Disease recommendations",
+        "x-apifox-folder": "operator",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "operator"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "disease": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "disease"
+                ],
+                "x-apifox-orders": [
+                  "disease"
+                ],
+                "x-apifox-ignore-properties": []
+              },
+              "example": {
+                "disease": "Heart Failure Clinical Records"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3673043/apis/api-129056732-run",
+        "security": []
+      }
+    },
+    "/api/operator/verify_prediction_results": {
+      "post": {
+        "summary": "Verify prediction results",
+        "x-apifox-folder": "operator",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "operator"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "user",
+                  "id"
+                ],
+                "x-apifox-orders": [
+                  "user",
+                  "id"
+                ],
+                "x-apifox-ignore-properties": []
+              },
+              "example": {
+                "user": "0x01f5BB073e893d334FF9b0e239939982c124AF97",
+                "id": 25
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3673043/apis/api-129056733-run",
+        "security": []
+      }
+    },
+    "/api/operator/predicting_outcomes": {
+      "post": {
+        "summary": "Forecast results",
+        "x-apifox-folder": "operator",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "operator"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user": {
+                    "type": "string"
+                  },
+                  "page": {
+                    "type": "integer"
+                  },
+                  "page_size": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "user",
+                  "page",
+                  "page_size"
+                ],
+                "x-apifox-orders": [
+                  "user",
+                  "page",
+                  "page_size"
+                ],
+                "x-apifox-ignore-properties": []
+              },
+              "example": {
+                "user": "0x01f5BB073e893d334FF9b0e239939982c124AF97",
+                "page": 3,
+                "page_size": 2
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3673043/apis/api-129056734-run",
+        "security": []
+      }
+    },
+    "/api/operator/article": {
+      "post": {
+        "summary": "article",
+        "x-apifox-folder": "operator",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "operator"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user": {
+                    "type": "string"
+                  },
+                  "diseases": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "user",
+                  "diseases"
+                ],
+                "x-apifox-orders": [
+                  "user",
+                  "diseases"
+                ],
+                "x-apifox-ignore-properties": []
+              },
+              "example": {
+                "diseases": [
+                  "Acute Inflammations"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3673043/apis/api-129056735-run",
+        "security": []
+      }
+    },
+    "/api/operator/DeletePredictedRecord": {
+      "post": {
+        "summary": "Delete prediction records",
+        "x-apifox-folder": "operator",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "operator"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user": {
+                    "type": "string"
+                  },
+                  "ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "required": [
+                  "user",
+                  "ids"
+                ],
+                "x-apifox-orders": [
+                  "user",
+                  "ids"
+                ],
+                "x-apifox-ignore-properties": []
+              },
+              "example": {
+                "user": "0x01f5BB073e893d334FF9b0e239939982c124AF97",
+                "ids": [
+                  3,
+                  26,
+                  27
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3673043/apis/api-129056736-run",
+        "security": []
+      }
+    },
+    "/api/user/register": {
+      "post": {
+        "summary": "User Registration",
+        "x-apifox-folder": "user",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "user"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "address": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "address"
+                ],
+                "x-apifox-orders": [
+                  "address"
+                ],
+                "x-apifox-ignore-properties": []
+              },
+              "example": {
+                "address": "0x01f5BB073e893d334FF9b0e239939982c124AF97"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3673043/apis/api-129056737-run",
+        "security": []
+      }
+    },
+    "/api/user/article_collection": {
+      "post": {
+        "summary": "Article Collection",
+        "x-apifox-folder": "user",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "user"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user": {
+                    "type": "string"
+                  },
+                  "url": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "user",
+                  "url"
+                ],
+                "x-apifox-orders": [
+                  "user",
+                  "url"
+                ],
+                "x-apifox-ignore-properties": []
+              },
+              "example": {
+                "user": "0x01f5BB073e893d334FF9b0e239939982c124AF97",
+                "url": "https://medium.com/@dririsbell/what-is-inflammation-f51900ddeab1"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3673043/apis/api-129056738-run",
+        "security": []
+      }
+    },
+    "/api/user/get_user": {
+      "post": {
+        "summary": "Check if the user has been registered",
+        "x-apifox-folder": "user",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "user"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "user"
+                ],
+                "x-apifox-orders": [
+                  "user"
+                ],
+                "x-apifox-ignore-properties": []
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3673043/apis/api-129056739-run",
+        "security": []
+      }
+    },
+    "/api/user/article_collection_check": {
+      "post": {
+        "summary": "Article Collection Check",
+        "x-apifox-folder": "user",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "user"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "user"
+                ],
+                "x-apifox-orders": [
+                  "user"
+                ],
+                "x-apifox-ignore-properties": []
+              },
+              "example": {
+                "user": "0x01f5BB073e893d334FF9b0e239939982c124AF97"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-orders": [],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3673043/apis/api-129056740-run",
+        "security": []
+      }
+    },
+    "/api/operator/disease_prediction_reload": {
+      "post": {
+        "summary": "Re predict",
+        "x-apifox-folder": "operator",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "operator"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "user",
+                  "id"
+                ],
+                "x-apifox-orders": [
+                  "user",
+                  "id"
+                ],
+                "x-apifox-ignore-properties": []
+              },
+              "example": {
+                "user": "0x4fda4174D5D07C906395bfB77806287cc65Fd129",
+                "id": 51
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ok": {
+                      "type": "boolean"
+                    },
+                    "msg": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": "string"
+                        },
+                        "inputs": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "name": {
+                                "type": "string"
+                              },
+                              "description": {
+                                "type": "string"
+                              },
+                              "index": {
+                                "type": "integer"
+                              },
+                              "regular": {
+                                "type": "string"
+                              },
+                              "warn": {
+                                "type": "string"
+                              },
+                              "input_method": {
+                                "type": "string"
+                              },
+                              "select": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "key": {
+                                      "type": "string"
+                                    },
+                                    "value": {
+                                      "type": "integer"
+                                    }
+                                  },
+                                  "required": [
+                                    "key",
+                                    "value"
+                                  ],
+                                  "x-apifox-ignore-properties": [],
+                                  "x-apifox-orders": [
+                                    "key",
+                                    "value"
+                                  ]
+                                }
+                              },
+                              "default": {
+                                "type": "object",
+                                "properties": {
+                                  "key": {
+                                    "type": "string"
+                                  },
+                                  "value": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "key",
+                                  "value"
+                                ],
+                                "x-apifox-ignore-properties": [],
+                                "x-apifox-orders": [
+                                  "key",
+                                  "value"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "name",
+                              "description",
+                              "index",
+                              "regular",
+                              "warn",
+                              "input_method",
+                              "select",
+                              "default"
+                            ],
+                            "x-apifox-ignore-properties": [],
+                            "x-apifox-orders": [
+                              "name",
+                              "description",
+                              "index",
+                              "regular",
+                              "warn",
+                              "input_method",
+                              "select",
+                              "default"
+                            ]
+                          }
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "description",
+                        "inputs"
+                      ],
+                      "x-apifox-ignore-properties": [],
+                      "x-apifox-orders": [
+                        "name",
+                        "description",
+                        "inputs"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "ok",
+                    "msg",
+                    "data"
+                  ],
+                  "x-apifox-ignore-properties": [],
+                  "x-apifox-orders": [
+                    "ok",
+                    "msg",
+                    "data"
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "Success example",
+                    "value": {
+                      "ok": true,
+                      "msg": "ok",
+                      "data": {
+                        "name": "Acute Inflammations",
+                        "description": "",
+                        "inputs": [
+                          {
+                            "name": "Temperature",
+                            "description": "Temperature of patient { 35C-42C }",
+                            "index": 0,
+                            "regular": "^(3[4-9]|[4-9][0-9]|46(\\.[0-5])?)$",
+                            "warn": "Please enter a number between 34 and 46.5",
+                            "input_method": "input",
+                            "select": [
+                              {
+                                "key": "celsius",
+                                "value": 0
+                              }
+                            ],
+                            "default": {
+                              "key": "Temperature",
+                              "value": "35.5"
+                            }
+                          },
+                          {
+                            "name": "Occurrence of nausea",
+                            "description": "Occurrence of nausea { yes, no }",
+                            "index": 1,
+                            "regular": "",
+                            "warn": "",
+                            "input_method": "select",
+                            "select": [
+                              {
+                                "key": "yes",
+                                "value": 1
+                              },
+                              {
+                                "key": "no",
+                                "value": 0
+                              }
+                            ],
+                            "default": {
+                              "key": "Occurrence of nausea",
+                              "value": "0"
+                            }
+                          },
+                          {
+                            "name": "Lumbar pain",
+                            "description": "Lumbar pain { yes, no }",
+                            "index": 2,
+                            "regular": "",
+                            "warn": "",
+                            "input_method": "select",
+                            "select": [
+                              {
+                                "key": "yes",
+                                "value": 1
+                              },
+                              {
+                                "key": "no",
+                                "value": 0
+                              }
+                            ],
+                            "default": {
+                              "key": "Lumbar pain",
+                              "value": "1"
+                            }
+                          },
+                          {
+                            "name": "Urine pushing",
+                            "description": "Urine pushing (continuous need for urination) { yes, no }",
+                            "index": 3,
+                            "regular": "",
+                            "warn": "",
+                            "input_method": "select",
+                            "select": [
+                              {
+                                "key": "yes",
+                                "value": 1
+                              },
+                              {
+                                "key": "no",
+                                "value": 0
+                              }
+                            ],
+                            "default": {
+                              "key": "Urine pushing",
+                              "value": "0"
+                            }
+                          },
+                          {
+                            "name": "Micturition pains",
+                            "description": "Micturition pains { yes, no }",
+                            "index": 4,
+                            "regular": "",
+                            "warn": "",
+                            "input_method": "select",
+                            "select": [
+                              {
+                                "key": "yes",
+                                "value": 1
+                              },
+                              {
+                                "key": "no",
+                                "value": 0
+                              }
+                            ],
+                            "default": {
+                              "key": "Micturition pains",
+                              "value": "0"
+                            }
+                          },
+                          {
+                            "name": "Burning of urethra, itch, swelling of urethra outlet",
+                            "description": "Burning of urethra, itch, swelling of urethra outlet { yes, no }",
+                            "index": 5,
+                            "regular": "",
+                            "warn": "",
+                            "input_method": "select",
+                            "select": [
+                              {
+                                "key": "yes",
+                                "value": 1
+                              },
+                              {
+                                "key": "no",
+                                "value": 0
+                              }
+                            ],
+                            "default": {
+                              "key": "Burning of urethra, itch, swelling of urethra outlet",
+                              "value": "0"
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3673043/apis/api-129596931-run",
+        "security": []
+      }
+    },
+    "/api/diseases/disease_list": {
+      "get": {
+        "summary": "Operator List",
+        "x-apifox-folder": "diseases",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "diseases"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ok": {
+                      "type": "boolean"
+                    },
+                    "count": {
+                      "type": "integer"
+                    },
+                    "msg": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": "string"
+                          },
+                          "position": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "name",
+                          "description",
+                          "position"
+                        ],
+                        "x-apifox-ignore-properties": [],
+                        "x-apifox-orders": [
+                          "name",
+                          "description",
+                          "position"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "ok",
+                    "count",
+                    "msg",
+                    "data"
+                  ],
+                  "x-apifox-ignore-properties": [],
+                  "x-apifox-orders": [
+                    "ok",
+                    "count",
+                    "msg",
+                    "data"
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "Success example",
+                    "value": {
+                      "ok": true,
+                      "count": 7,
+                      "msg": "Query completed",
+                      "data": [
+                        {
+                          "name": "Heart Disease",
+                          "description": "",
+                          "position": "chest"
+                        },
+                        {
+                          "name": "Lymphography",
+                          "description": "",
+                          "position": "neck"
+                        },
+                        {
+                          "name": "Parkinsons",
+                          "description": "",
+                          "position": "head"
+                        },
+                        {
+                          "name": "Breast Cancer",
+                          "description": "",
+                          "position": "chest"
+                        },
+                        {
+                          "name": "Acute Inflammations",
+                          "description": "",
+                          "position": "head"
+                        },
+                        {
+                          "name": "",
+                          "position": "chest"
+                        },
+                        {
+                          "name": "Chronic Kidney Disease",
+                          "description": "",
+                          "position": "abdomen"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3673043/apis/api-130999835-run",
+        "security": []
+      }
+    },
+    "/api/operator/predicting_outcomes_fuzzy_query": {
+      "post": {
+        "summary": "Fuzzy Query of Prediction Results",
+        "x-apifox-folder": "operator",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "operator"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user": {
+                    "type": "string"
+                  },
+                  "key": {
+                    "type": "string"
+                  },
+                  "page": {
+                    "type": "integer"
+                  },
+                  "page_size": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "user",
+                  "key",
+                  "page",
+                  "page_size"
+                ],
+                "x-apifox-orders": [
+                  "user",
+                  "key",
+                  "page",
+                  "page_size"
+                ],
+                "x-apifox-ignore-properties": []
+              },
+              "example": {
+                "user": "0x4fda4174D5D07C906395bfB77806287cc65Fd129",
+                "key": "A",
+                "page": 2,
+                "page-size": 2
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-ignore-properties": [],
+                  "x-apifox-orders": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3673043/apis/api-133562050-run",
+        "security": []
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "securitySchemes": {}
+  },
+  "servers": []
+}
